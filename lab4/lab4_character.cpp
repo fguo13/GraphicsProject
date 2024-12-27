@@ -578,7 +578,7 @@ struct MyBot {
 	void cleanup() {
 		glDeleteProgram(programID);
 	}
-}; 
+};
 
 int main(void)
 {
@@ -632,7 +632,7 @@ int main(void)
 
 	// Time and frame rate tracking
 	static double lastTime = glfwGetTime();
-	float time = 0.0f;			// Animation time 
+	float time = 0.0f;			// Animation time
 	float fTime = 0.0f;			// Time for measuring fps
 	unsigned long frames = 0;
 
@@ -656,15 +656,15 @@ int main(void)
 		glm::mat4 vp = projectionMatrix * viewMatrix;
 		bot.render(vp);
 
-		// FPS tracking 
+		// FPS tracking
 		// Count number of frames over a few seconds and take average
 		frames++;
 		fTime += deltaTime;
-		if (fTime > 2.0f) {		
+		if (fTime > 2.0f) {
 			float fps = frames / fTime;
 			frames = 0;
 			fTime = 0;
-			
+
 			std::stringstream stream;
 			stream << std::fixed << std::setprecision(2) << "Lab 4 | Frames per second (FPS): " << fps;
 			glfwSetWindowTitle(window, stream.str().c_str());
@@ -691,7 +691,7 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 	{
 		playbackSpeed += 1.0f;
-		if (playbackSpeed > 10.0f) 
+		if (playbackSpeed > 10.0f)
 			playbackSpeed = 10.0f;
 	}
 
