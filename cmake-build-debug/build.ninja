@@ -55,8 +55,6 @@ build CMakeFiles/lab4_skeleton.dir/lab4/lab4_skeleton.cpp.obj: CXX_COMPILER__lab
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
   OBJECT_DIR = CMakeFiles\lab4_skeleton.dir
   OBJECT_FILE_DIR = CMakeFiles\lab4_skeleton.dir\lab4
-  TARGET_COMPILE_PDB = CMakeFiles\lab4_skeleton.dir\
-  TARGET_PDB = lab4_skeleton.pdb
 
 build CMakeFiles/lab4_skeleton.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__lab4_skeleton_unscanned_Debug C$:/Users/frank/Downloads/lab4/lab4/render/shader.cpp || cmake_object_order_depends_target_lab4_skeleton
   DEP_FILE = CMakeFiles\lab4_skeleton.dir\lab4\render\shader.cpp.obj.d
@@ -64,8 +62,6 @@ build CMakeFiles/lab4_skeleton.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__lab
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
   OBJECT_DIR = CMakeFiles\lab4_skeleton.dir
   OBJECT_FILE_DIR = CMakeFiles\lab4_skeleton.dir\lab4\render
-  TARGET_COMPILE_PDB = CMakeFiles\lab4_skeleton.dir\
-  TARGET_PDB = lab4_skeleton.pdb
 
 
 # =============================================================================
@@ -75,16 +71,15 @@ build CMakeFiles/lab4_skeleton.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__lab
 #############################################
 # Link the executable lab4_skeleton.exe
 
-build lab4_skeleton.exe: CXX_EXECUTABLE_LINKER__lab4_skeleton_Debug CMakeFiles/lab4_skeleton.dir/lab4/lab4_skeleton.cpp.obj CMakeFiles/lab4_skeleton.dir/lab4/render/shader.cpp.obj | glfw3dll.a libglad.a || glfw3.dll libglad.a
+build lab4_skeleton.exe: CXX_EXECUTABLE_LINKER__lab4_skeleton_Debug CMakeFiles/lab4_skeleton.dir/lab4/lab4_skeleton.cpp.obj CMakeFiles/lab4_skeleton.dir/lab4/render/shader.cpp.obj | glfw3dll.a libglad.dll.a || glfw3.dll libglad.dll
   FLAGS = -g
-  LINK_LIBRARIES = -lopengl32  -lglu32  glfw3dll.a  libglad.a  -lopengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = -lopengl32  -lglu32  glfw3dll.a  libglad.dll.a  -lopengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\lab4_skeleton.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\lab4_skeleton.dir\
   TARGET_FILE = lab4_skeleton.exe
   TARGET_IMPLIB = liblab4_skeleton.dll.a
-  TARGET_PDB = lab4_skeleton.pdb
+  TARGET_PDB = lab4_skeleton.exe.dbg
 
 # =============================================================================
 # Object build statements for EXECUTABLE target lab4_character
@@ -101,8 +96,6 @@ build CMakeFiles/lab4_character.dir/lab4/lab4_character.cpp.obj: CXX_COMPILER__l
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
   OBJECT_DIR = CMakeFiles\lab4_character.dir
   OBJECT_FILE_DIR = CMakeFiles\lab4_character.dir\lab4
-  TARGET_COMPILE_PDB = CMakeFiles\lab4_character.dir\
-  TARGET_PDB = lab4_character.pdb
 
 build CMakeFiles/lab4_character.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__lab4_character_unscanned_Debug C$:/Users/frank/Downloads/lab4/lab4/render/shader.cpp || cmake_object_order_depends_target_lab4_character
   DEP_FILE = CMakeFiles\lab4_character.dir\lab4\render\shader.cpp.obj.d
@@ -110,8 +103,6 @@ build CMakeFiles/lab4_character.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__la
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
   OBJECT_DIR = CMakeFiles\lab4_character.dir
   OBJECT_FILE_DIR = CMakeFiles\lab4_character.dir\lab4\render
-  TARGET_COMPILE_PDB = CMakeFiles\lab4_character.dir\
-  TARGET_PDB = lab4_character.pdb
 
 
 # =============================================================================
@@ -121,16 +112,56 @@ build CMakeFiles/lab4_character.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__la
 #############################################
 # Link the executable lab4_character.exe
 
-build lab4_character.exe: CXX_EXECUTABLE_LINKER__lab4_character_Debug CMakeFiles/lab4_character.dir/lab4/lab4_character.cpp.obj CMakeFiles/lab4_character.dir/lab4/render/shader.cpp.obj | glfw3dll.a libglad.a || glfw3.dll libglad.a
+build lab4_character.exe: CXX_EXECUTABLE_LINKER__lab4_character_Debug CMakeFiles/lab4_character.dir/lab4/lab4_character.cpp.obj CMakeFiles/lab4_character.dir/lab4/render/shader.cpp.obj | glfw3dll.a libglad.dll.a || glfw3.dll libglad.dll
   FLAGS = -g
-  LINK_LIBRARIES = -lopengl32  -lglu32  glfw3dll.a  libglad.a  -lopengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = -lopengl32  -lglu32  glfw3dll.a  libglad.dll.a  -lopengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\lab4_character.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\lab4_character.dir\
   TARGET_FILE = lab4_character.exe
   TARGET_IMPLIB = liblab4_character.dll.a
-  TARGET_PDB = lab4_character.pdb
+  TARGET_PDB = lab4_character.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target lab4_skybox
+
+
+#############################################
+# Order-only phony target for lab4_skybox
+
+build cmake_object_order_depends_target_lab4_skybox: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw
+
+build CMakeFiles/lab4_skybox.dir/lab4/skybox.cpp.obj: CXX_COMPILER__lab4_skybox_unscanned_Debug C$:/Users/frank/Downloads/lab4/lab4/skybox.cpp || cmake_object_order_depends_target_lab4_skybox
+  DEP_FILE = CMakeFiles\lab4_skybox.dir\lab4\skybox.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
+  OBJECT_DIR = CMakeFiles\lab4_skybox.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab4_skybox.dir\lab4
+
+build CMakeFiles/lab4_skybox.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__lab4_skybox_unscanned_Debug C$:/Users/frank/Downloads/lab4/lab4/render/shader.cpp || cmake_object_order_depends_target_lab4_skybox
+  DEP_FILE = CMakeFiles\lab4_skybox.dir\lab4\render\shader.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
+  OBJECT_DIR = CMakeFiles\lab4_skybox.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab4_skybox.dir\lab4\render
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target lab4_skybox
+
+
+#############################################
+# Link the executable lab4_skybox.exe
+
+build lab4_skybox.exe: CXX_EXECUTABLE_LINKER__lab4_skybox_Debug CMakeFiles/lab4_skybox.dir/lab4/skybox.cpp.obj CMakeFiles/lab4_skybox.dir/lab4/render/shader.cpp.obj | glfw3dll.a libglad.dll.a || glfw3.dll libglad.dll
+  FLAGS = -g
+  LINK_LIBRARIES = -lopengl32  -lglu32  glfw3dll.a  libglad.dll.a  -lopengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\lab4_skybox.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = lab4_skybox.exe
+  TARGET_IMPLIB = liblab4_skybox.dll.a
+  TARGET_PDB = lab4_skybox.exe.dbg
 
 
 #############################################
@@ -189,7 +220,7 @@ build external/rebuild_cache: phony external/CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target glad
+# Object build statements for SHARED_LIBRARY target glad
 
 
 #############################################
@@ -198,30 +229,31 @@ build external/rebuild_cache: phony external/CMakeFiles/rebuild_cache.util
 build cmake_object_order_depends_target_glad: phony || .
 
 build external/glad-3.3/CMakeFiles/glad.dir/src/gl.c.obj: C_COMPILER__glad_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glad-3.3/src/gl.c || cmake_object_order_depends_target_glad
+  DEFINES = -Dglad_EXPORTS
   DEP_FILE = external\glad-3.3\CMakeFiles\glad.dir\src\gl.c.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
   OBJECT_DIR = external\glad-3.3\CMakeFiles\glad.dir
   OBJECT_FILE_DIR = external\glad-3.3\CMakeFiles\glad.dir\src
-  TARGET_COMPILE_PDB = external\glad-3.3\CMakeFiles\glad.dir\glad.pdb
-  TARGET_PDB = libglad.pdb
 
 
 # =============================================================================
-# Link build statements for STATIC_LIBRARY target glad
+# Link build statements for SHARED_LIBRARY target glad
 
 
 #############################################
-# Link the static library libglad.a
+# Link the shared library libglad.dll
 
-build libglad.a: C_STATIC_LIBRARY_LINKER__glad_Debug external/glad-3.3/CMakeFiles/glad.dir/src/gl.c.obj
+build libglad.dll libglad.dll.a: C_SHARED_LIBRARY_LINKER__glad_Debug external/glad-3.3/CMakeFiles/glad.dir/src/gl.c.obj
   LANGUAGE_COMPILE_FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = external\glad-3.3\CMakeFiles\glad.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = external\glad-3.3\CMakeFiles\glad.dir\glad.pdb
-  TARGET_FILE = libglad.a
-  TARGET_PDB = libglad.pdb
+  RESTAT = 1
+  TARGET_FILE = libglad.dll
+  TARGET_IMPLIB = libglad.dll.a
+  TARGET_PDB = glad.dll.dbg
 
 
 #############################################
@@ -295,8 +327,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/context.c.obj: C_COMPILER__glf
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/init.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/init.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -305,8 +335,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/init.c.obj: C_COMPILER__glfw_u
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/input.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/input.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -315,8 +343,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/input.c.obj: C_COMPILER__glfw_
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/monitor.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/monitor.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -325,8 +351,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/monitor.c.obj: C_COMPILER__glf
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/window.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/window.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -335,8 +359,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/window.c.obj: C_COMPILER__glfw
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_init.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/win32_init.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -345,8 +367,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_init.c.obj: C_COMPILER__
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_monitor.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/win32_monitor.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -355,8 +375,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_monitor.c.obj: C_COMPILE
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_time.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/win32_time.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -365,8 +383,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_time.c.obj: C_COMPILER__
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_tls.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/win32_tls.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -375,8 +391,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_tls.c.obj: C_COMPILER__g
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_window.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/win32_window.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -385,8 +399,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/win32_window.c.obj: C_COMPILER
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/winmm_joystick.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/winmm_joystick.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -395,8 +407,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/winmm_joystick.c.obj: C_COMPIL
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/wgl_context.c.obj: C_COMPILER__glfw_unscanned_Debug C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/wgl_context.c || cmake_object_order_depends_target_glfw
   DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_USE_CONFIG_H -Dglfw_EXPORTS
@@ -405,8 +415,6 @@ build external/glfw-3.1.2/src/CMakeFiles/glfw.dir/wgl_context.c.obj: C_COMPILER_
   INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src -IC:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/src
   OBJECT_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
   OBJECT_FILE_DIR = external\glfw-3.1.2\src\CMakeFiles\glfw.dir
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
-  TARGET_PDB = glfw3.pdb
 
 
 # =============================================================================
@@ -424,10 +432,9 @@ build glfw3.dll glfw3dll.a: C_SHARED_LIBRARY_LINKER__glfw_Debug external/glfw-3.
   POST_BUILD = cd .
   PRE_LINK = cd .
   RESTAT = 1
-  TARGET_COMPILE_PDB = external\glfw-3.1.2\src\CMakeFiles\glfw.dir\
   TARGET_FILE = glfw3.dll
   TARGET_IMPLIB = glfw3dll.a
-  TARGET_PDB = glfw3.pdb
+  TARGET_PDB = glfw3.dll.dbg
 
 
 #############################################
@@ -455,13 +462,15 @@ build external/glfw-3.1.2/src/rebuild_cache: phony external/glfw-3.1.2/src/CMake
 # =============================================================================
 # Target aliases.
 
-build glad: phony libglad.a
+build glad: phony libglad.dll
 
 build glfw: phony glfw3.dll
 
 build lab4_character: phony lab4_character.exe
 
 build lab4_skeleton: phony lab4_skeleton.exe
+
+build lab4_skybox: phony lab4_skybox.exe
 
 # =============================================================================
 # Folder targets.
@@ -471,7 +480,7 @@ build lab4_skeleton: phony lab4_skeleton.exe
 #############################################
 # Folder: C:/Users/frank/Downloads/lab4/cmake-build-debug
 
-build all: phony lab4_skeleton.exe lab4_character.exe external/all
+build all: phony lab4_skeleton.exe lab4_character.exe lab4_skybox.exe external/all
 
 # =============================================================================
 
@@ -485,7 +494,7 @@ build external/all: phony external/glad-3.3/all external/glfw-3.1.2/all
 #############################################
 # Folder: C:/Users/frank/Downloads/lab4/cmake-build-debug/external/glad-3.3
 
-build external/glad-3.3/all: phony libglad.a
+build external/glad-3.3/all: phony libglad.dll
 
 # =============================================================================
 
@@ -513,14 +522,14 @@ build external/glfw-3.1.2/src/all: phony glfw3.dll
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompiler.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompiler.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCompilerIdDetection.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompileFeatures.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineRCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeFindBinUtils.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeParseImplicitLinkInfo.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeParseLibraryArchitecture.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeRCCompiler.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystem.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCompilerCommon.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestRCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckIncludeFile.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckLibraryExists.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Bruce-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Compaq-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-FindBinUtils.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/HP-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/LCC-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SDCC-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SunPro-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/TI-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XL-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XLClang-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/zOS-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindOpenGL.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageMessage.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindThreads.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckFlagCommonConfig.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/FeatureTesting.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-Determine-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/WriteBasicConfigVersionFile.cmake C$:/Users/frank/Downloads/lab4/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glad-3.3/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3.pc.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3Config.cmake.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw_config.h.in CMakeCache.txt CMakeFiles/3.29.6/CMakeCCompiler.cmake CMakeFiles/3.29.6/CMakeCXXCompiler.cmake CMakeFiles/3.29.6/CMakeRCCompiler.cmake CMakeFiles/3.29.6/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckIncludeFile.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckLibraryExists.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindOpenGL.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageMessage.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindThreads.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckFlagCommonConfig.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/WriteBasicConfigVersionFile.cmake C$:/Users/frank/Downloads/lab4/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glad-3.3/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3.pc.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3Config.cmake.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw_config.h.in CMakeCache.txt CMakeFiles/3.29.6/CMakeCCompiler.cmake CMakeFiles/3.29.6/CMakeCXXCompiler.cmake CMakeFiles/3.29.6/CMakeRCCompiler.cmake CMakeFiles/3.29.6/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompiler.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompiler.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCompilerIdDetection.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompileFeatures.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineRCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeFindBinUtils.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeParseImplicitLinkInfo.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeParseLibraryArchitecture.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeRCCompiler.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystem.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCompilerCommon.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestRCCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckIncludeFile.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckLibraryExists.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Bruce-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Compaq-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-FindBinUtils.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/HP-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/LCC-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SDCC-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SunPro-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/TI-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XL-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XLClang-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/zOS-C-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindOpenGL.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageMessage.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindThreads.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckFlagCommonConfig.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/FeatureTesting.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-Determine-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/WriteBasicConfigVersionFile.cmake C$:/Users/frank/Downloads/lab4/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glad-3.3/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3.pc.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3Config.cmake.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw_config.h.in CMakeCache.txt CMakeFiles/3.29.6/CMakeCCompiler.cmake CMakeFiles/3.29.6/CMakeCXXCompiler.cmake CMakeFiles/3.29.6/CMakeRCCompiler.cmake CMakeFiles/3.29.6/CMakeSystem.cmake: phony
+build C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakePackageConfigHelpers.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckIncludeFile.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/CheckLibraryExists.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindOpenGL.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindPackageMessage.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/FindThreads.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckCompilerFlag.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckFlagCommonConfig.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-Initialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake C$:/Program$ Files/JetBrains/CLion$ 2024.2.2/bin/cmake/win/x64/share/cmake-3.29/Modules/WriteBasicConfigVersionFile.cmake C$:/Users/frank/Downloads/lab4/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glad-3.3/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/CMakeLists.txt C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3.pc.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw3Config.cmake.in C$:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src/glfw_config.h.in CMakeCache.txt CMakeFiles/3.29.6/CMakeCCompiler.cmake CMakeFiles/3.29.6/CMakeCXXCompiler.cmake CMakeFiles/3.29.6/CMakeRCCompiler.cmake CMakeFiles/3.29.6/CMakeSystem.cmake: phony
 
 
 #############################################

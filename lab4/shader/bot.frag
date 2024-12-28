@@ -1,7 +1,7 @@
 #version 330 core
 
 in vec3 worldPosition;
-in vec3 worldNormal; 
+in vec3 worldNormal;
 
 out vec3 finalColor;
 
