@@ -245,20 +245,22 @@ void initSkybox() {
     }
 }
 
-void renderSkybox(glm::mat4 view, glm::mat4 projection) {
+void renderSkybox(glm::mat4 view, glm::mat4 projection, glm::vec3 cameraPosition) {
     // Set depth function to allow skybox to be rendered in the background
     glDepthFunc(GL_LEQUAL);
 
     // Use the skybox shader program
     glUseProgram(programID);
 
-
     // Remove translation from the view matrix
     glm::mat4 viewNoTranslation = glm::mat4(glm::mat3(view));
 
+    // Add a slight movement based on the camera's position
+    float movementFactor = 0.01f; // Adjust to control how much the skybox moves
+    glm::mat4 slightMovement = glm::translate(glm::mat4(1.0f), -cameraPosition * movementFactor);
 
-    // Compute the MVP matrix with a large scale
-    glm::mat4 mvp = projection * viewNoTranslation * glm::scale(glm::mat4(1.0f), glm::vec3(500.0f));
+    // Compute the MVP matrix
+    glm::mat4 mvp = projection * viewNoTranslation * slightMovement * glm::scale(glm::mat4(1.0f), glm::vec3(500.0f));
 
     // Pass the MVP matrix to the shader
     GLuint mvpLoc = glGetUniformLocation(programID, "MVP");
@@ -279,6 +281,7 @@ void renderSkybox(glm::mat4 view, glm::mat4 projection) {
     // Reset depth function
     glDepthFunc(GL_LESS);
 }
+
 
 void renderPlane(glm::mat4 view, glm::mat4 projection) {
     glUseProgram(planeProgramID);
@@ -400,54 +403,4 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 
 
 
-int main() {
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW\n";
-        return -1;
-    }
-
-    GLFWwindow* window = glfwCreateWindow(1000, 800, "Skybox Example", nullptr, nullptr);
-    if (!window) {
-        std::cerr << "Failed to open GLFW window\n";
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    // Ensure we can capture the escape key being pressed below
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-    glfwSetKeyCallback(window, key_callback);
-
-
-
-    gladLoadGL(glfwGetProcAddress);
-
-    glEnable(GL_DEPTH_TEST);
-    initSkybox();
-    eye_center.y = viewDistance * cos(viewPolar);
-    eye_center.x = viewDistance * cos(viewAzimuth);
-    eye_center.z = viewDistance * sin(viewAzimuth);
-
-    glm::mat4 viewMatrix, projectionMatrix;
-    glm::float32 FoV = 80;
-    glm::float32 zNear = 0.1f;
-    glm::float32 zFar = 1000.0f;
-    projectionMatrix = glm::perspective(glm::radians(FoV), 4.0f / 3.0f, zNear, zFar);
-
-    initPlane();
-
-    while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glm::mat4 view = glm::lookAt(eye_center, lookat, up);
-        renderSkybox(view, projectionMatrix);
-        renderPlane(view, projectionMatrix);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
-    return 0;
-}
-
-
-
+//
