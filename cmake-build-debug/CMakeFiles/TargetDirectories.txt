@@ -1,4 +1,3 @@
-C:/Users/frank/Downloads/lab4/cmake-build-debug/CMakeFiles/lab4_skeleton.dir
 C:/Users/frank/Downloads/lab4/cmake-build-debug/CMakeFiles/lab4_character.dir
 C:/Users/frank/Downloads/lab4/cmake-build-debug/CMakeFiles/lab4_skybox.dir
 C:/Users/frank/Downloads/lab4/cmake-build-debug/CMakeFiles/lab4_main.dir

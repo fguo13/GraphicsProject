@@ -17,15 +17,6 @@ include_directories(
 		lab4/
 )
 
-add_executable(lab4_skeleton
-		lab4/lab4_skeleton.cpp
-		lab4/render/shader.cpp
-)
-target_link_libraries(lab4_skeleton
-		${OPENGL_LIBRARY}
-		glfw
-		glad
-)
 
 add_executable(lab4_character
 		lab4/lab4_character.cpp
@@ -40,7 +31,6 @@ target_link_libraries(lab4_character
 add_executable(lab4_skybox
 		lab4/skybox.cpp
 		lab4/render/shader.cpp
-		lab4/skybox.cpp
 )
 
 target_link_libraries(lab4_skybox

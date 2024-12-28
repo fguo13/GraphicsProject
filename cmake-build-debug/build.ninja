@@ -41,47 +41,6 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/frank/Downloads/lab4/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target lab4_skeleton
-
-
-#############################################
-# Order-only phony target for lab4_skeleton
-
-build cmake_object_order_depends_target_lab4_skeleton: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw
-
-build CMakeFiles/lab4_skeleton.dir/lab4/lab4_skeleton.cpp.obj: CXX_COMPILER__lab4_skeleton_unscanned_Debug C$:/Users/frank/Downloads/lab4/lab4/lab4_skeleton.cpp || cmake_object_order_depends_target_lab4_skeleton
-  DEP_FILE = CMakeFiles\lab4_skeleton.dir\lab4\lab4_skeleton.cpp.obj.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
-  OBJECT_DIR = CMakeFiles\lab4_skeleton.dir
-  OBJECT_FILE_DIR = CMakeFiles\lab4_skeleton.dir\lab4
-
-build CMakeFiles/lab4_skeleton.dir/lab4/render/shader.cpp.obj: CXX_COMPILER__lab4_skeleton_unscanned_Debug C$:/Users/frank/Downloads/lab4/lab4/render/shader.cpp || cmake_object_order_depends_target_lab4_skeleton
-  DEP_FILE = CMakeFiles\lab4_skeleton.dir\lab4\render\shader.cpp.obj.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/frank/Downloads/lab4/external/glfw-3.1.2/include -IC:/Users/frank/Downloads/lab4/external/glm-0.9.7.1 -IC:/Users/frank/Downloads/lab4/external/glad-opengl-3.3/include -IC:/Users/frank/Downloads/lab4/external/tinygltf-2.9.3 -IC:/Users/frank/Downloads/lab4/lab4 -IC:/Users/frank/Downloads/lab4/external/glad-3.3/include
-  OBJECT_DIR = CMakeFiles\lab4_skeleton.dir
-  OBJECT_FILE_DIR = CMakeFiles\lab4_skeleton.dir\lab4\render
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target lab4_skeleton
-
-
-#############################################
-# Link the executable lab4_skeleton.exe
-
-build lab4_skeleton.exe: CXX_EXECUTABLE_LINKER__lab4_skeleton_Debug CMakeFiles/lab4_skeleton.dir/lab4/lab4_skeleton.cpp.obj CMakeFiles/lab4_skeleton.dir/lab4/render/shader.cpp.obj | glfw3dll.a libglad.dll.a || glfw3.dll libglad.dll
-  FLAGS = -g
-  LINK_LIBRARIES = -lopengl32  -lglu32  glfw3dll.a  libglad.dll.a  -lopengl32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\lab4_skeleton.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_FILE = lab4_skeleton.exe
-  TARGET_IMPLIB = liblab4_skeleton.dll.a
-  TARGET_PDB = lab4_skeleton.exe.dbg
-
-# =============================================================================
 # Object build statements for EXECUTABLE target lab4_character
 
 
@@ -525,8 +484,6 @@ build lab4_character: phony lab4_character.exe
 
 build lab4_main: phony lab4_main.exe
 
-build lab4_skeleton: phony lab4_skeleton.exe
-
 build lab4_skybox: phony lab4_skybox.exe
 
 # =============================================================================
@@ -537,7 +494,7 @@ build lab4_skybox: phony lab4_skybox.exe
 #############################################
 # Folder: C:/Users/frank/Downloads/lab4/cmake-build-debug
 
-build all: phony lab4_skeleton.exe lab4_character.exe lab4_skybox.exe lab4_main.exe external/all
+build all: phony lab4_character.exe lab4_skybox.exe lab4_main.exe external/all
 
 # =============================================================================
 
