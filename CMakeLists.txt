@@ -51,3 +51,15 @@ target_link_libraries(lab4_main
 		glfw
 		glad
 )
+
+add_executable(lab3_cornell
+		lab4/lab3_cornellbox.cpp
+		lab4/render/shader.cpp
+		lab4/lab3_cornellbox.cpp
+)
+
+target_link_libraries(lab3_cornell
+		${OPENGL_LIBRARY}
+		glfw
+		glad
+)
