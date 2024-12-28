@@ -1,12 +1,12 @@
 #version 330 core
 
-layout(location = 0) in vec3 vertexPosition;  // Vertex position
-layout(location = 1) in vec3 vertexNormal;    // Vertex normal
-layout(location = 3) in vec4 jointIndices;   // Indices of joints influencing the vertex
-layout(location = 4) in vec4 jointWeights;    // Weights of the joints
+layout(location = 0) in vec3 vertexPosition;
+layout(location = 1) in vec3 vertexNormal;
+layout(location = 3) in vec4 jointIndices;
+layout(location = 4) in vec4 jointWeights;
 
-uniform mat4 jointMatrices[100];  // Array of joint matrices (adjust size as needed)
-uniform mat4 MVP;                 // Model-View-Projection matrix
+uniform mat4 jointMatrices[100];
+uniform mat4 MVP;
 
 out vec3 fragNormal;
 out vec3 worldPosition;

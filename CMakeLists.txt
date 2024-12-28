@@ -36,3 +36,15 @@ target_link_libraries(lab4_character
 	glfw
 	glad
 )
+
+add_executable(lab4_skybox
+		lab4/skybox.cpp
+		lab4/render/shader.cpp
+		lab4/skybox.cpp
+)
+
+target_link_libraries(lab4_skybox
+		${OPENGL_LIBRARY}
+		glfw
+		glad
+)
