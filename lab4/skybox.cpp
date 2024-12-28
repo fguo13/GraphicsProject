@@ -66,7 +66,7 @@ void initPlane() {
         0, 2, 3
     };
 
-    planeTexture = LoadTextureTileBox("../lab4/shader/grasstexture.jpg");
+    planeTexture = LoadTextureTileBox("../lab4/shader/asphalt_04_diff_4k.jpg");
 
     glGenVertexArrays(1, &planeVAO);
     glGenBuffers(1, &planeVBO);
@@ -285,7 +285,7 @@ void renderPlane(glm::mat4 view, glm::mat4 projection) {
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(0.0f, -10.0f, 0.0f)); // Lower plane
-    model = glm::scale(model, glm::vec3(5000.0f, 1.0f, 5000.0f)); // Make infinite
+    model = glm::scale(model, glm::vec3(7500.0f, 1.0f, 7500.0f)); // Make infinite
 
     GLuint modelLoc = glGetUniformLocation(planeProgramID, "model");
     GLuint viewLoc = glGetUniformLocation(planeProgramID, "view");
@@ -294,6 +294,8 @@ void renderPlane(glm::mat4 view, glm::mat4 projection) {
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &model[0][0]);
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, &projection[0][0]);
+    GLuint textureScaleLoc = glGetUniformLocation(planeProgramID, "textureScale");
+    glUniform1f(textureScaleLoc, 25.0f); // Repeat the texture 25 times
 
     glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, uvBufferID);
@@ -312,82 +314,91 @@ void renderPlane(glm::mat4 view, glm::mat4 projection) {
 
 
 
-// Is called whenever a key is pressed/released via GLFW
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
+static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-
-    float floorHeight = -7.0f; // Minimum camera height to prevent passing through the plane
+    static float viewPitch = 0.0f;
+    static float viewAzimuth = 0.0f;
+    const float maxPitch = glm::radians(89.0f); // Stops looking too far down/up
+    const float minHeight = -5.0f;
+    const float maxHeight = 300.0f;
 
     if (key == GLFW_KEY_R && action == GLFW_PRESS)
     {
-        viewAzimuth = 0.f;
-        viewPolar = 0.f;
-        eye_center.y = viewDistance * cos(viewPolar);
-        eye_center.x = viewDistance * cos(viewAzimuth);
-        eye_center.z = viewDistance * sin(viewAzimuth);
-        std::cout << "Reset." << std::endl;
+        eye_center = glm::vec3(-278.0f, 273.0f, 800.0f);
+        viewPitch = 0.0f;
     }
 
     if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
-        viewPolar -= 0.1f;
-        eye_center.y = viewDistance * cos(viewPolar);
+        viewPitch += glm::radians(2.0f);
+        if (viewPitch < -maxPitch) {
+            viewPitch = -maxPitch;
+        }
     }
 
     if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
-        viewPolar += 0.1f;
-        eye_center.y = viewDistance * cos(viewPolar);
+        viewPitch -= glm::radians(2.0f);
+        if (viewPitch > maxPitch) {
+            viewPitch = maxPitch;
+        }
     }
 
     if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
-        viewAzimuth -= 0.1f;
-        eye_center.x = viewDistance * cos(viewAzimuth);
-        eye_center.z = viewDistance * sin(viewAzimuth);
+        viewAzimuth -= glm::radians(2.0f);
     }
 
     if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
-        viewAzimuth += 0.1f;
-        eye_center.x = viewDistance * cos(viewAzimuth);
-        eye_center.z = viewDistance * sin(viewAzimuth);
+        viewAzimuth += glm::radians(2.0f);
     }
-    if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+
+    lookat = eye_center + glm::vec3(
+        cos(viewPitch) * cos(viewAzimuth),
+        sin(viewPitch),
+        cos(viewPitch) * sin(viewAzimuth)
+    );
+
+    if (eye_center.y < minHeight) {
+        eye_center.y = minHeight;
+    }
+    if (eye_center.y > maxHeight) {
+        eye_center.y = maxHeight;
+    }
+
+    if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS))
+    {
         glm::vec3 forward = glm::normalize(lookat - eye_center);
         eye_center += forward * 5.0f;
         lookat += forward * 5.0f;
     }
-    if (key == GLFW_KEY_S && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+    if (key == GLFW_KEY_S && (action == GLFW_REPEAT || action == GLFW_PRESS))
+    {
         glm::vec3 backward = glm::normalize(eye_center - lookat);
         eye_center += backward * 5.0f;
         lookat += backward * 5.0f;
     }
-    if (key == GLFW_KEY_A && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-        glm::vec3 left = glm::normalize(glm::cross(up, lookat - eye_center));
+    if (key == GLFW_KEY_A && (action == GLFW_REPEAT || action == GLFW_PRESS))
+    {
+        glm::vec3 left = glm::normalize(glm::cross(lookat - eye_center, glm::vec3(0.0f, 1.0f, 0.0f))); // Fix the order for left
         eye_center -= left * 5.0f;
         lookat -= left * 5.0f;
     }
-    if (key == GLFW_KEY_D && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-        glm::vec3 right = glm::normalize(glm::cross(lookat - eye_center, up));
+    if (key == GLFW_KEY_D && (action == GLFW_REPEAT || action == GLFW_PRESS))
+    {
+        glm::vec3 right = glm::normalize(glm::cross(lookat - eye_center, glm::vec3(0.0f, 1.0f, 0.0f)));
         eye_center += right * 5.0f;
         lookat += right * 5.0f;
     }
 
-    if (eye_center.y < floorHeight) {
-        eye_center.y = floorHeight;
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, GL_TRUE);
     }
-
-    if (lookat.y < floorHeight) {
-        lookat.y = floorHeight;
-    }
-
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, true);
-    }
-
-
 }
+
+
 
 int main() {
     if (!glfwInit()) {
