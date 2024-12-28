@@ -282,6 +282,15 @@ GLFW_USE_HYBRID_HPG:BOOL=OFF
 // lib or lib64
 LIB_SUFFIX:STRING=
 
+//Value Computed by CMake
+Lab4_BINARY_DIR:STATIC=C:/Users/frank/Downloads/lab4/cmake-build-debug
+
+//Value Computed by CMake
+Lab4_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Lab4_SOURCE_DIR:STATIC=C:/Users/frank/Downloads/lab4
+
 //OpenGL library for win32
 OPENGL_gl_LIBRARY:STRING=opengl32
 
