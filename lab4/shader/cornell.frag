@@ -19,10 +19,12 @@ void main()
 
     // Calculate the direction vector from the fragment position to the light source
     vec3 lightDir = normalize(lightPosition - worldPosition);
+    float length = length(lightPosition - worldPosition);
 
     // Calculate the Lambertian reflectance (diffuse) component
     float cosTheta = max(dot(normal, lightDir), 0.0);
-    vec3 diffuse = color * lightIntensity * cosTheta;
+    vec3 diffuse = (color * lightIntensity * cosTheta) / (length * length);
+
 
     // Tone mapping (Reinhard)
     vec3 mappedColor = diffuse / (1.0 + diffuse);

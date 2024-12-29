@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/frank/Downloads/lab4/external
+# Install script for directory: C:/Users/frank/CLionProjects/GraphicsProject/external
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,8 +39,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/frank/Downloads/lab4/cmake-build-debug/external/glad-3.3/cmake_install.cmake")
-  include("C:/Users/frank/Downloads/lab4/cmake-build-debug/external/glfw-3.1.2/cmake_install.cmake")
+  include("C:/Users/frank/CLionProjects/GraphicsProject/cmake-build-debug/external/glad-3.3/cmake_install.cmake")
+  include("C:/Users/frank/CLionProjects/GraphicsProject/cmake-build-debug/external/glfw-3.1.2/cmake_install.cmake")
 
 endif()
 

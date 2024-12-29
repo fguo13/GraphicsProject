@@ -3,14 +3,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
 
 #include <render/shader.h>
 
 #include <vector>
 #include <iostream>
-#define _USE_MATH_DEFINES
 #include <math.h>
 
 static GLFWwindow *window;
@@ -28,7 +26,7 @@ static float FoV = 45.0f;
 static float zNear = 600.0f;
 static float zFar = 1500.0f;
 
-// Lighting control 
+// Lighting control
 const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
 const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
 const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
@@ -47,7 +45,7 @@ static float depthFar = 1000.0f;
 // Helper flag and function to save depth maps for debugging
 static bool saveDepth = false;
 
-// This function retrieves and stores the depth map of the default frame buffer 
+// This function retrieves and stores the depth map of the default frame buffer
 // or a particular frame buffer (indicated by FBO ID) to a PNG image.
 static void saveDepthTexture(GLuint fbo, std::string filename) {
     int width = shadowMapWidth;
@@ -56,8 +54,8 @@ static void saveDepthTexture(GLuint fbo, std::string filename) {
 		width = windowWidth;
 		height = windowHeight;
 	}
-    int channels = 3; 
-    
+    int channels = 3;
+
     std::vector<float> depth(width * height);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     glReadBuffer(GL_DEPTH_COMPONENT);

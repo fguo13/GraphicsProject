@@ -53617,7 +53617,7 @@
 				},
 				{
 					"input":133,
-					"interpolation":"LINEAR",
+					"interpolation":"STEP",
 					"output":437
 				},
 				{

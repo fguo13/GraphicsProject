@@ -4,7 +4,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <render/shader.h>
 #include <iostream>
-#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 GLuint skyboxVAO, skyboxVBO, skyboxEBO;
@@ -260,7 +259,7 @@ void renderSkybox(glm::mat4 view, glm::mat4 projection, glm::vec3 cameraPosition
     glm::mat4 slightMovement = glm::translate(glm::mat4(1.0f), -cameraPosition * movementFactor);
 
     // Compute the MVP matrix
-    glm::mat4 mvp = projection * viewNoTranslation * slightMovement * glm::scale(glm::mat4(1.0f), glm::vec3(500.0f));
+    glm::mat4 mvp = projection * viewNoTranslation * slightMovement * glm::scale(glm::mat4(1.0f), glm::vec3(1000.0f));
 
     // Pass the MVP matrix to the shader
     GLuint mvpLoc = glGetUniformLocation(programID, "MVP");

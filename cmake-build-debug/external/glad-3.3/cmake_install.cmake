@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/frank/Downloads/lab4/external/glad-3.3
+# Install script for directory: C:/Users/frank/CLionProjects/GraphicsProject/external/glad-3.3
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

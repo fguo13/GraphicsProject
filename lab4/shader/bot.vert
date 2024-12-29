@@ -12,12 +12,23 @@ out vec3 fragNormal;
 out vec3 worldPosition;
 out vec3 worldNormal;
 
+uniform FirstHalf { mat4[1000] firstHalfOfJoints; };
+
+uniform SecondHalf { mat4[112] secondHalfOfJoints; };
+
+mat4 indexJoint(int index) {
+    if (index < 1000)
+        return firstHalfOfJoints[index];
+    else
+        return secondHalfOfJoints[index - 1000];
+}
+
 void main() {
     mat4 skinMatrix = mat4(0.0);
 
     // Compute the skinning matrix
     for (int i = 0; i < 4; i++) {
-        skinMatrix += jointWeights[i] * jointMatrices[int(jointIndices[i])];
+        skinMatrix += jointWeights[i] * indexJoint(int(jointIndices[i]));
     }
 
     // Apply skinning transformation

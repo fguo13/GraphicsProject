@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/frank/Downloads/lab4/external/glfw-3.1.2/src
+# Install script for directory: C:/Users/frank/CLionProjects/GraphicsProject/external/glfw-3.1.2/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
