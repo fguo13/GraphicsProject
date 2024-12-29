@@ -2,15 +2,18 @@
 
 layout(location = 0) in vec3 vertexPosition;
 layout(location = 1) in vec3 vertexNormal;
+layout(location = 2) in vec2 vertexTexCoords;
 layout(location = 3) in vec4 jointIndices;
 layout(location = 4) in vec4 jointWeights;
 
 uniform mat4 jointMatrices[100];
 uniform mat4 MVP;
+uniform mat4 nodeMatrix;
 
 out vec3 fragNormal;
 out vec3 worldPosition;
 out vec3 worldNormal;
+out vec2 texCoords;
 
 uniform FirstHalf { mat4[1000] firstHalfOfJoints; };
 
@@ -33,11 +36,12 @@ void main() {
 
     // Apply skinning transformation
     vec4 skinnedPosition = skinMatrix * vec4(vertexPosition, 1.0);
-    gl_Position = MVP * skinnedPosition;
+    gl_Position = MVP * nodeMatrix * skinnedPosition;
 
     // Transform normal
     fragNormal = mat3(skinMatrix) * vertexNormal;
 
     worldPosition = vertexPosition;
     worldNormal = vertexNormal;
+    texCoords = vertexTexCoords;
 }

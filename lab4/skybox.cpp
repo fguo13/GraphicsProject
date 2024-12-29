@@ -286,7 +286,7 @@ void renderPlane(glm::mat4 view, glm::mat4 projection) {
     glUseProgram(planeProgramID);
 
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0f, -10.0f, 0.0f)); // Lower plane
+    model = glm::translate(model, glm::vec3(0.0f, -2.5f, 0.0f)); // Lower plane
     model = glm::scale(model, glm::vec3(7500.0f, 1.0f, 7500.0f)); // Make infinite
 
     GLuint modelLoc = glGetUniformLocation(planeProgramID, "model");

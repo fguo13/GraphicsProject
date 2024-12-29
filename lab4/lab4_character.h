@@ -24,6 +24,7 @@
 static int windowWidth = 1024;
 static int windowHeight = 768;
 
+
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 
 // Camera
@@ -56,6 +57,7 @@ struct MyBot {
 	};
 	std::vector<PrimitiveObject> primitiveObjects;
 	std::map<std::string, std::vector<PrimitiveObject>> primitiveObjectsByName;
+	std::map<int, GLuint> textures;
 
 	// Skinning
 	struct SkinObject {
@@ -69,6 +71,9 @@ struct MyBot {
 		std::vector<glm::mat4> jointMatrices;
 	};
 	std::vector<SkinObject> skinObjects;
+	glm::vec3 position = glm::vec3(0, 0, 0);
+	glm::vec3 scale = glm::vec3(40.0,40.0,40.0);
+	float angle = 0.0f;
 
 	// Animation
 	struct SamplerObject {
@@ -85,6 +90,33 @@ struct MyBot {
 		std::vector<SamplerObject> samplers;	// Animation data
 	};
 	std::vector<AnimationObject> animationObjects;
+
+	GLuint _LoadTextureTileBox(const char* textureFilePath) {
+		int width, height, channels;
+		unsigned char* img = stbi_load(textureFilePath, &width, &height, &channels, 0);
+		if (!img) {
+			std::cerr << "Failed to load texture: " << textureFilePath << std::endl;
+			return 0;
+		}
+
+		GLuint texture;
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+
+		// Set texture wrapping and filtering parameters
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		// Upload the texture to the GPU
+		glTexImage2D(GL_TEXTURE_2D, 0, (channels == 4 ? GL_RGBA : GL_RGB), width, height, 0,
+					 (channels == 4 ? GL_RGBA : GL_RGB), GL_UNSIGNED_BYTE, img);
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		stbi_image_free(img); // Free the image memory after uploading
+		return texture;
+	}
 
 	glm::mat4 getNodeTransform(const tinygltf::Node& node) {
 		glm::mat4 transform(1.0f);
@@ -500,6 +532,10 @@ struct MyBot {
 
 	std::vector<PrimitiveObject> bindModel(tinygltf::Model &model) {
 		std::vector<PrimitiveObject> primitiveObjects;
+		for (size_t i = 0; i < model.images.size(); ++i) {
+			std::string uri = "../lab4/model/jinx/" + model.images[i].uri;
+			this->textures[i] = _LoadTextureTileBox(uri.c_str());
+		}
 
 		const tinygltf::Scene &scene = model.scenes[model.defaultScene];
 		for (size_t i = 0; i < scene.nodes.size(); ++i) {
@@ -523,6 +559,17 @@ struct MyBot {
 
 			tinygltf::Primitive primitive = mesh.primitives[i];
 			tinygltf::Accessor indexAccessor = model.accessors[primitive.indices];
+			if (primitive.material >= 0) {
+				tinygltf::Material material = model.materials[primitive.material];
+				if(material.pbrMetallicRoughness.baseColorTexture.index >= 0) {
+					glActiveTexture(GL_TEXTURE0);
+					glBindTexture(GL_TEXTURE_2D, this->textures[material.pbrMetallicRoughness.baseColorTexture.index]);
+				}
+				glm::vec3 materialColor = {material.pbrMetallicRoughness.baseColorFactor[0],
+					material.pbrMetallicRoughness.baseColorFactor[1],
+					material.pbrMetallicRoughness.baseColorFactor[2]};
+				glUniform3fv(glGetUniformLocation(programID, "material"), 1, &materialColor[0]);
+			}
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbos.at(indexAccessor.bufferView));
 
@@ -538,6 +585,8 @@ struct MyBot {
 						tinygltf::Model &model, tinygltf::Node &node) {
 		// Draw the mesh at the node, and recursively do so for children nodes
 		if ((node.mesh >= 0) && (node.mesh < model.meshes.size())) {
+			auto transform = getNodeTransform(node);
+			glUniformMatrix4fv(glGetUniformLocation(programID, "nodeMatrix"), 1, GL_FALSE, &transform[0][0]);
 			drawMesh(primitiveObjects, model, model.meshes[node.mesh]);
 		}
 		for (size_t i = 0; i < node.children.size(); i++) {
@@ -557,26 +606,43 @@ struct MyBot {
 		glUseProgram(programID);
 
 		// Set camera
-		glm::mat4 mvp = cameraMatrix * glm::scale(glm::mat4(1.0f), glm::vec3(40.0f));
-		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
+		glm::mat4 modelMatrix = glm::mat4(1.0f);
+		modelMatrix = glm::translate(modelMatrix, position);
+		modelMatrix = glm::rotate(modelMatrix, angle, glm::vec3(0,1,0));
+		modelMatrix = glm::scale(modelMatrix, glm::vec3(scale));
+		glm::mat4 mvp = cameraMatrix * modelMatrix;
 		GLuint buffer_handle;
-		glGenBuffers(1, &buffer_handle);
-		glBindBuffer(GL_UNIFORM_BUFFER, buffer_handle);
-		glBufferData(GL_UNIFORM_BUFFER, 1000 * sizeof(glm::mat4), skinObjects[0].jointMatrices.data(), GL_DYNAMIC_DRAW);
-		glBindBufferBase(GL_UNIFORM_BUFFER, glGetUniformBlockIndex(programID, "FirstHalf"), buffer_handle);
-
-		//get the index location and size of the block
 		GLuint second_buffer_handle;
-		glGenBuffers(1, &second_buffer_handle);
-		glBindBuffer(GL_UNIFORM_BUFFER, second_buffer_handle);
-		glBufferData(GL_UNIFORM_BUFFER, (skinObjects[0].jointMatrices.size() - 1000) * sizeof(glm::mat4), skinObjects[0].jointMatrices.data() + 1000, GL_DYNAMIC_DRAW);
-		glBindBufferBase(GL_UNIFORM_BUFFER, glGetUniformBlockIndex(programID, "SecondHalf"), second_buffer_handle);
+		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
+		if(skinObjects.size() != 0) {
+			if(skinObjects[0].jointMatrices.size() > 1000) {
+
+				glGenBuffers(1, &buffer_handle);
+				glBindBuffer(GL_UNIFORM_BUFFER, buffer_handle);
+				glBufferData(GL_UNIFORM_BUFFER, 1000 * sizeof(glm::mat4), skinObjects[0].jointMatrices.data(), GL_DYNAMIC_DRAW);
+				glBindBufferBase(GL_UNIFORM_BUFFER, glGetUniformBlockIndex(programID, "FirstHalf"), buffer_handle);
+
+				//get the index location and size of the block
+				glGenBuffers(1, &second_buffer_handle);
+				glBindBuffer(GL_UNIFORM_BUFFER, second_buffer_handle);
+				glBufferData(GL_UNIFORM_BUFFER, (skinObjects[0].jointMatrices.size() - 1000) * sizeof(glm::mat4), skinObjects[0].jointMatrices.data() + 1000, GL_DYNAMIC_DRAW);
+				glBindBufferBase(GL_UNIFORM_BUFFER, glGetUniformBlockIndex(programID, "SecondHalf"), second_buffer_handle);
+			} else {
+
+			}
+		} else {
+			std::vector <glm::mat4> jointMatrices(1000, glm::mat4(1.0f));
+			glGenBuffers(1, &buffer_handle);
+			glBindBuffer(GL_UNIFORM_BUFFER, buffer_handle);
+			glBufferData(GL_UNIFORM_BUFFER, 1000 * sizeof(glm::mat4), jointMatrices.data(), GL_DYNAMIC_DRAW);
+			glBindBufferBase(GL_UNIFORM_BUFFER, glGetUniformBlockIndex(programID, "FirstHalf"), buffer_handle);
+		}
 
 
 		// -----------------------------------------------------------------
 		// TODO: Set animation data for linear blend skinning in shader
 		// -----------------------------------------------------------------
-		glUniformMatrix4fv(jointMatricesID, 25, GL_FALSE, &skinObjects[0].jointMatrices[0][0][0]);
+		//glUniformMatrix4fv(jointMatricesID, 25, GL_FALSE, &skinObjects[0].jointMatrices[0][0][0]);
 
 
 

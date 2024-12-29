@@ -22,9 +22,9 @@ float viewDistance = 600.0f, viewPolar = -1.5f;
 static float viewPitch = 0.0f;
 static float viewAzimuth = 0.0f;
 const float maxPitch = glm::radians(89.0f); // Prevent looking too far up/down
-const float moveSpeed = 5.0f;              // Speed of movement
-const float minHeight = -5.0f;
-const float maxHeight = 300.0f;
+const float moveSpeed = 15.0f;              // Speed of movement
+const float minHeight = -1.0f;
+const float maxHeight = 3000.0f;
 static double lastTime = glfwGetTime();
 float _time = 0.0f;
 
@@ -698,14 +698,14 @@ int main()
 
 
 		// Render plane
-		renderPlane(viewMatrix, projectionMatrix);
+		//renderPlane(viewMatrix, projectionMatrix);
 
 		// Render Cornell Box
 		box.render(vpMatrix);
 
 		// Render skybox
 
-		renderSkybox(viewMatrix, projectionMatrix, eye_center);
+		//renderSkybox(viewMatrix, projectionMatrix, eye_center);
 
 		bot.render(vpMatrix);
 		double currentTime = glfwGetTime();
@@ -714,7 +714,8 @@ int main()
 
 
 			_time += deltaTime * playbackSpeed;
-			bot.update(_time);
+			bot.update(_time/2);
+			bot.position.z += 0.2;
 
 		// Swap buffers
 		glfwSwapBuffers(window);
