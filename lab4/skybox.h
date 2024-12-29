@@ -20,6 +20,6 @@ void initSkybox();
 void renderSkybox(glm::mat4 view, glm::mat4 projection, glm::vec3 cameraPosition);
 
 void initPlane();
-void renderPlane(glm::mat4 view, glm::mat4 projection);
+void renderPlane(glm::mat4 view, glm::mat4 projection, glm::mat4 lightView, glm::mat4 lightProjection);
 
 #endif

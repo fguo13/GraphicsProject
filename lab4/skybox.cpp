@@ -61,8 +61,8 @@ void initPlane() {
 
 
     GLuint planeIndices[] = {
-        0, 1, 2,
-        0, 2, 3
+        2, 1, 0,
+        3, 2, 0
     };
 
     planeTexture = LoadTextureTileBox("../lab4/shader/asphalt_04_diff_4k.jpg");
@@ -282,20 +282,23 @@ void renderSkybox(glm::mat4 view, glm::mat4 projection, glm::vec3 cameraPosition
 }
 
 
-void renderPlane(glm::mat4 view, glm::mat4 projection) {
+void renderPlane(glm::mat4 view, glm::mat4 projection, glm::mat4 lightView, glm::mat4 lightProjection) {
     glUseProgram(planeProgramID);
 
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0f, -2.5f, 0.0f)); // Lower plane
+    model = glm::translate(model, glm::vec3(0.0f, -3.0f, 0.0f)); // Lower plane
     model = glm::scale(model, glm::vec3(7500.0f, 1.0f, 7500.0f)); // Make infinite
 
     GLuint modelLoc = glGetUniformLocation(planeProgramID, "model");
     GLuint viewLoc = glGetUniformLocation(planeProgramID, "view");
     GLuint projLoc = glGetUniformLocation(planeProgramID, "projection");
+    GLuint lightMVPLoc = glGetUniformLocation(planeProgramID, "lightMVP");
+    auto lightMVP = lightProjection * lightView;
 
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &model[0][0]);
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, &projection[0][0]);
+    glUniformMatrix4fv(lightMVPLoc, 1, GL_FALSE, &lightMVP[0][0]);
     GLuint textureScaleLoc = glGetUniformLocation(planeProgramID, "textureScale");
     glUniform1f(textureScaleLoc, 25.0f); // Repeat the texture 25 times
 
@@ -308,6 +311,7 @@ void renderPlane(glm::mat4 view, glm::mat4 projection) {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, planeTexture);
     glUniform1i(textureSamplerID, 0);
+    glUniform1i(glGetUniformLocation(planeProgramID, "shadowMap"), 1);
 
     glBindVertexArray(planeVAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

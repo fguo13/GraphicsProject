@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/lab3_cornell.dir/includes_CXX.rsp
 
-CXX_FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+CXX_FLAGS = -g -std=gnu++11 -fdiagnostics-color=always -ggdb
 

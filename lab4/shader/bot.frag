@@ -10,6 +10,7 @@ uniform vec3 lightPosition;
 uniform vec3 lightIntensity;
 uniform sampler2D textureSampler;
 uniform vec3 material;
+uniform bool useTexture;
 
 void main()
 {
@@ -24,5 +25,16 @@ void main()
 
 	// Gamma correction
 	finalColor = pow(v, vec3(1.0 / 2.2));
-	finalColor = material * texture(textureSampler, texCoords).rgb;
+	if(useTexture)
+	{
+	    finalColor = texture(textureSampler, texCoords).rgb;
+	    if(texture(textureSampler, texCoords).a < 0.5)
+	    {
+	        discard;
+	    }
+	}
+	else
+	{
+	    finalColor = material;
+	}
 }

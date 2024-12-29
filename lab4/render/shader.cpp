@@ -3,11 +3,18 @@
 #include <string> 
 #include <iostream> 
 #include <fstream>
+#include <map>
 #include <sstream> 
 #include <vector>
 
+std::map<std::string, GLuint> shaderCache;
+
 GLuint LoadShadersFromFile(const char *vertex_file_path, const char *fragment_file_path)
 {
+	std::string key = std::string("vertex_") + std::string(vertex_file_path) + "#" + std::string(fragment_file_path);
+	if (shaderCache.find(key) != shaderCache.end()) {
+		return shaderCache[key];
+	}
 	// Create the shaders
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -112,6 +119,9 @@ GLuint LoadShadersFromFile(const char *vertex_file_path, const char *fragment_fi
 
 	glDeleteShader(VertexShaderID);
 	glDeleteShader(FragmentShaderID);
+
+	shaderCache[key] = ProgramID;
+
 
 	return ProgramID;
 }

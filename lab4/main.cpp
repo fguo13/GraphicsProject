@@ -12,6 +12,8 @@
 #undef TINYGLTF_IMPLEMENTATION
 #undef STB_IMAGE_IMPLEMENTATION
 #undef STB_IMAGE_WRITE_IMPLEMENTATION
+#include <random>
+
 #include "skybox.h"
 #include "lab4_character.h"
 
@@ -23,7 +25,7 @@ static float viewPitch = 0.0f;
 static float viewAzimuth = 0.0f;
 const float maxPitch = glm::radians(89.0f); // Prevent looking too far up/down
 const float moveSpeed = 15.0f;              // Speed of movement
-const float minHeight = -1.0f;
+const float minHeight = 0.0f;
 const float maxHeight = 3000.0f;
 static double lastTime = glfwGetTime();
 float _time = 0.0f;
@@ -436,7 +438,7 @@ struct CornellBox {
 		glBindVertexArray(vertexArrayID);
 
     // Set model-view-projection matrix
-	glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 10.0f, 0.0f)); // Offset above plane
+	glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -2.5f, 0.0f)); // Offset above plane
     glm::mat4 mvp = cameraMatrix * glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
     glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
 
@@ -522,53 +524,65 @@ struct CornellBox {
 	}
 };
 
+void recalculateView() {
+	glm::vec3 forward(
+		cos(viewPitch) * cos(viewAzimuth),
+		sin(viewPitch),
+		cos(viewPitch) * sin(viewAzimuth)
+	);
+	forward = glm::normalize(forward);
+
+	lookat = eye_center + forward;
+}
+
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-
+    const float moveSpeed = 5.0f;
+    const float minHeight = -1.0f;
+    const float maxHeight = 3000.0f;
 
     if (key == GLFW_KEY_R && action == GLFW_PRESS)
     {
         eye_center = glm::vec3(0.0f, 100.0f, 800.0f);
         viewPitch = 0.0f;
         viewAzimuth = 0.0f;
+        recalculateView();
     }
 
     if (key == GLFW_KEY_UP && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
         viewPitch += glm::radians(2.0f);
         viewPitch = glm::clamp(viewPitch, -maxPitch, maxPitch);
+        recalculateView();
     }
 
     if (key == GLFW_KEY_DOWN && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
         viewPitch -= glm::radians(2.0f);
         viewPitch = glm::clamp(viewPitch, -maxPitch, maxPitch);
+        recalculateView();
     }
 
     if (key == GLFW_KEY_LEFT && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
         viewAzimuth -= glm::radians(2.0f);
+        recalculateView();
     }
 
     if (key == GLFW_KEY_RIGHT && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
         viewAzimuth += glm::radians(2.0f);
+        recalculateView();
     }
 
-    if (eye_center.y < minHeight) {
-        eye_center.y = minHeight;
-    }
-    if (eye_center.y > maxHeight) {
-        eye_center.y = maxHeight;
-    }
     glm::vec3 forward(
         cos(viewPitch) * cos(viewAzimuth),
         sin(viewPitch),
-        cos(viewPitch) * sin(viewAzimuth));
+        cos(viewPitch) * sin(viewAzimuth)
+    );
     forward = glm::normalize(forward);
 
     glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
-    glm::vec3 up = glm::normalize(glm::cross(right, forward));
 
     if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS))
     {
@@ -587,13 +601,17 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
         eye_center += right * moveSpeed;
     }
 
-	lookat = eye_center + forward;
+    // Clamp height
+    eye_center.y = glm::clamp(eye_center.y, minHeight, maxHeight);
+
+    lookat = eye_center + forward;
 
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
 }
+
 
 void cursor_callback(GLFWwindow* window, double xpos, double ypos) {
 	// Normalize mouse coordinates to [-1, 1]
@@ -609,7 +627,7 @@ void cursor_callback(GLFWwindow* window, double xpos, double ypos) {
 	glm::vec3 rotatedOffset = glm::vec3(rotationMatrix * glm::vec4(mouseOffset, 1.0f));
 
 	// Compute the final light position
-	lightPosition = eye_center + rotatedOffset;
+	//lightPosition = eye_center + rotatedOffset;
 
 }
 
@@ -652,14 +670,21 @@ int main()
 	CornellBox box;
 	box.initialize();
 
-	MyBot bot;
-	bot.initialize();
+	MyBot jinx;
+	jinx.initialize("../lab4/model/jinx/XP_Jinx_Rig.gltf");
+
+
+	MyBot motel;
+	motel.initialize("../lab4/model/buildings/motelfix8.gltf");
+
+
 
     initSkybox();
     initPlane();
 
     float FoV = 80.0f;
     glm::mat4 projectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 0.1f, 6000.0f);
+	glm::mat4 lightProjectionMatrix = glm::perspective(glm::radians(FoV), 1024.0f / 768.0f, 100.0f, 6000.0f);
 
 	unsigned int depthMapFBO;
 	glGenFramebuffers(1, &depthMapFBO);
@@ -671,51 +696,105 @@ int main()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	std::cout<<depthMapFBO<<"is the value of depthMapFBO"<<std::endl;
 	std::cout<<depthMap<<"is the value of depthMap"<<std::endl;
+	recalculateView();
+	glEnable(GL_CULL_FACE);
+
+	std::vector<std::string> modelPaths = {
+		"../lab4/model/buildings/building111.gltf",
+		"../lab4/model/buildings/building222.gltf",
+		"../lab4/model/buildings/building3333.gltf"
+	};
+
+	// Vector to store models
+	using Model = MyBot;
+	std::vector<Model> models;
+	float left = -6000.0f;
+	float right = -6000.0f;
+
+	// Random number generation setup
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> coordDist(250.0f, 350.0f);
+	std::uniform_real_distribution<float> roadOffsetDist(300.0f, 400.0f); // Offset for buildings from the road
+	std::uniform_int_distribution<int> pathDist(0, modelPaths.size() - 1);
+
+	for (int i = 0; i < 150; ++i) {
+		std::string modelName = modelPaths[i % modelPaths.size()];
+		float z = coordDist(gen); // Position along the road (z-axis)
+		float offset = roadOffsetDist(gen); // Distance from the road (x-axis)
+
+		// Create buildings on both sides of the road
+		MyBot leftBuilding;
+		leftBuilding.initialize(modelName.c_str());
+		leftBuilding.position = glm::vec3(-offset, 0.0f, left); // Left side of the road
+		left += coordDist(gen);
+		models.push_back(leftBuilding);
+
+		MyBot rightBuilding;
+		rightBuilding.initialize(modelName.c_str());
+		rightBuilding.position = glm::vec3(offset, 0.0f, right); // Right side of the road
+		right += coordDist(gen);
+		models.push_back(rightBuilding);
+	}
+
 
     // Main loop
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		// Compute view matrix
-		glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
-		glm::mat4 vpMatrix = projectionMatrix * viewMatrix;
-
 		// Rotate mouse offset based on camera viewAzimuth
-		glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(viewAzimuth), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), -viewAzimuth + glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		mouseOffset.z = 100.0f;
 		glm::vec3 rotatedOffset = glm::vec3(rotationMatrix * glm::vec4(mouseOffset, 1.0f));
 
 		// Compute the final light position
 		lightPosition = eye_center + rotatedOffset;
+
+		// Compute view matrix
+		glm::mat4 viewMatrix = glm::lookAt(eye_center, lookat, up);
+		glm::mat4 vpMatrix = projectionMatrix * viewMatrix;
+		glm::mat4 lightViewMatrix = glm::lookAt(lightPosition, lookat, up);
+		glm::mat4 lightVpMatrix = lightProjectionMatrix * lightViewMatrix;
+
+
 		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 		glClearColor(0.2f, 0.2f, 0.25f, 0.0f);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		// Render plane
-		renderPlane(viewMatrix, projectionMatrix);
-		box.render(vpMatrix);
-		renderSkybox(viewMatrix, projectionMatrix, eye_center);
+		renderPlane(lightViewMatrix, lightProjectionMatrix, lightViewMatrix, lightProjectionMatrix);
+		box.render(lightVpMatrix);
 		//saveDepthTexture("image1.png");
 	    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, depthMap);
+		glActiveTexture(GL_TEXTURE0);
 
+		//viewMatrix = lightViewMatrix;
+		//projectionMatrix = lightProjectionMatrix;
+		//vpMatrix = lightProjectionMatrix * lightViewMatrix;
 
 		// Render plane
-		//renderPlane(viewMatrix, projectionMatrix);
+		renderPlane(viewMatrix, projectionMatrix, lightViewMatrix, lightProjectionMatrix);
 
 		// Render Cornell Box
 		box.render(vpMatrix);
 
-		// Render skybox
+		//Render skybox
 
 		//renderSkybox(viewMatrix, projectionMatrix, eye_center);
 
-		bot.render(vpMatrix);
+		jinx.render(vpMatrix);
+		motel.render(vpMatrix);
+		for (auto& model : models) {
+			model.render(vpMatrix);
+		}
 		double currentTime = glfwGetTime();
 		float deltaTime = float(currentTime - lastTime);
 		lastTime = currentTime;
+		_time += deltaTime * playbackSpeed;
+		jinx.update(_time/2);
+		jinx.position.z += 0.2;
+		motel.position.y = -2.5f;
 
-
-			_time += deltaTime * playbackSpeed;
-			bot.update(_time/2);
-			bot.position.z += 0.2;
 
 		// Swap buffers
 		glfwSwapBuffers(window);

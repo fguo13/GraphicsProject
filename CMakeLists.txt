@@ -9,6 +9,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 
 add_subdirectory(external)
 
+add_compile_options(-ggdb)
+
 include_directories(
 		external/glfw-3.1.2/include/
 		external/glm-0.9.7.1/

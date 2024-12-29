@@ -31,6 +31,8 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 static float FoV = 45.0f;
 static float zNear = 100.0f;
 static float zFar = 1500.0f;
+std::map<std::string, GLuint> textureCache;
+std::map<std::string, tinygltf::Model> modelCache;
 
 // Lighting
 static glm::vec3 _lightIntensity(5e6f, 5e6f, 5e6f);
@@ -50,10 +52,11 @@ struct MyBot {
 
 	tinygltf::Model model;
 
+	std::map<int, GLuint> vbos;
+
 	// Each VAO corresponds to each mesh primitive in the GLTF model
 	struct PrimitiveObject {
 		GLuint vao;
-		std::map<int, GLuint> vbos;
 	};
 	std::vector<PrimitiveObject> primitiveObjects;
 	std::map<std::string, std::vector<PrimitiveObject>> primitiveObjectsByName;
@@ -93,7 +96,7 @@ struct MyBot {
 
 	GLuint _LoadTextureTileBox(const char* textureFilePath) {
 		int width, height, channels;
-		unsigned char* img = stbi_load(textureFilePath, &width, &height, &channels, 0);
+		unsigned char* img = stbi_load(textureFilePath, &width, &height, &channels, 4);
 		if (!img) {
 			std::cerr << "Failed to load texture: " << textureFilePath << std::endl;
 			return 0;
@@ -110,8 +113,8 @@ struct MyBot {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		// Upload the texture to the GPU
-		glTexImage2D(GL_TEXTURE_2D, 0, (channels == 4 ? GL_RGBA : GL_RGB), width, height, 0,
-					 (channels == 4 ? GL_RGBA : GL_RGB), GL_UNSIGNED_BYTE, img);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
+					 GL_RGBA, GL_UNSIGNED_BYTE, img);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		stbi_image_free(img); // Free the image memory after uploading
@@ -387,9 +390,14 @@ struct MyBot {
 			updateSkinning(skinObjects[0].globalJointTransforms);
 
 		}
+
 	}
 
 	bool loadModel(tinygltf::Model &model, const char *filename) {
+		if (modelCache.find(std::string(filename)) != modelCache.end()) {
+			this->model = modelCache[std::string(filename)];
+			return true;
+		}
 		tinygltf::TinyGLTF loader;
 		std::string err;
 		std::string warn;
@@ -408,12 +416,14 @@ struct MyBot {
 		else
 			std::cout << "Loaded glTF: " << filename << std::endl;
 
+		modelCache[std::string(filename)] = model;
+
 		return res;
 	}
 
-	void initialize() {
+	void initialize(const char* filePath) {
 		// Modify your path if needed
-		if (!loadModel(model, "../lab4/model/jinx/XP_Jinx_Rig.gltf")) {
+		if (!loadModel(model, filePath)) {
 			return;
 		}
 
@@ -443,29 +453,8 @@ struct MyBot {
 	void bindMesh(std::vector<PrimitiveObject> &primitiveObjects,
 				tinygltf::Model &model, tinygltf::Mesh &mesh) {
 
-		std::map<int, GLuint> vbos;
-		for (size_t i = 0; i < model.bufferViews.size(); ++i) {
-			const tinygltf::BufferView &bufferView = model.bufferViews[i];
 
-			int target = bufferView.target;
 
-			if (bufferView.target == 0) {
-				// The bufferView with target == 0 in our model refers to
-				// the skinning weights, for 25 joints, each 4x4 matrix (16 floats), totaling to 400 floats or 1600 bytes.
-				// So it is considered safe to skip the warning.
-				//std::cout << "WARN: bufferView.target is zero" << std::endl;
-				continue;
-			}
-
-			const tinygltf::Buffer &buffer = model.buffers[bufferView.buffer];
-			GLuint vbo;
-			glGenBuffers(1, &vbo);
-			glBindBuffer(target, vbo);
-			glBufferData(target, bufferView.byteLength,
-						&buffer.data.at(0) + bufferView.byteOffset, GL_STATIC_DRAW);
-
-			vbos[i] = vbo;
-		}
 
 		// Each mesh can contain several primitives (or parts), each we need to
 		// bind to an OpenGL vertex array object
@@ -508,7 +497,7 @@ struct MyBot {
 			// Record VAO for later use
 			PrimitiveObject primitiveObject;
 			primitiveObject.vao = vao;
-			primitiveObject.vbos = vbos;
+
 			primitiveObjectsByName[mesh.name].push_back(primitiveObject);
 
 			glBindVertexArray(0);
@@ -531,10 +520,39 @@ struct MyBot {
 	}
 
 	std::vector<PrimitiveObject> bindModel(tinygltf::Model &model) {
+		for (size_t i = 0; i < model.bufferViews.size(); ++i) {
+			const tinygltf::BufferView &bufferView = model.bufferViews[i];
+
+			int target = bufferView.target;
+
+			if (bufferView.target == 0) {
+				// The bufferView with target == 0 in our model refers to
+				// the skinning weights, for 25 joints, each 4x4 matrix (16 floats), totaling to 400 floats or 1600 bytes.
+				// So it is considered safe to skip the warning.
+				//std::cout << "WARN: bufferView.target is zero" << std::endl;
+				continue;
+			}
+
+			const tinygltf::Buffer &buffer = model.buffers[bufferView.buffer];
+			GLuint vbo;
+			glGenBuffers(1, &vbo);
+			glBindBuffer(target, vbo);
+			glBufferData(target, bufferView.byteLength,
+						&buffer.data.at(0) + bufferView.byteOffset, GL_STATIC_DRAW);
+
+			vbos[i] = vbo;
+		}
 		std::vector<PrimitiveObject> primitiveObjects;
 		for (size_t i = 0; i < model.images.size(); ++i) {
-			std::string uri = "../lab4/model/jinx/" + model.images[i].uri;
-			this->textures[i] = _LoadTextureTileBox(uri.c_str());
+			std::string uri = "../lab4/model/buildings/" + model.images[i].uri;
+			if (textureCache.find(std::string(uri)) != textureCache.end()) {
+				this->textures[i] = textureCache[std::string(uri)];
+			}
+			else {
+				this->textures[i] = _LoadTextureTileBox(uri.c_str());
+				textureCache[std::string(uri)] = textures[i];
+			}
+
 		}
 
 		const tinygltf::Scene &scene = model.scenes[model.defaultScene];
@@ -542,6 +560,7 @@ struct MyBot {
 			assert((scene.nodes[i] >= 0) && (scene.nodes[i] < model.nodes.size()));
 			bindModelNodes(primitiveObjects, model, model.nodes[scene.nodes[i]]);
 		}
+
 
 		return primitiveObjects;
 	}
@@ -553,17 +572,18 @@ struct MyBot {
 		{
 			auto & primitiveObject = primitiveObjectsByName.at(mesh.name).at(i);
 			GLuint vao = primitiveObjectsByName.at(mesh.name).at(i).vao;
-			std::map<int, GLuint> vbos = primitiveObjectsByName.at(mesh.name).at(i).vbos;
 
 			glBindVertexArray(vao);
 
 			tinygltf::Primitive primitive = mesh.primitives[i];
 			tinygltf::Accessor indexAccessor = model.accessors[primitive.indices];
 			if (primitive.material >= 0) {
+				glUniform1i(glGetUniformLocation(programID, "useTexture"), 0);
 				tinygltf::Material material = model.materials[primitive.material];
 				if(material.pbrMetallicRoughness.baseColorTexture.index >= 0) {
 					glActiveTexture(GL_TEXTURE0);
 					glBindTexture(GL_TEXTURE_2D, this->textures[material.pbrMetallicRoughness.baseColorTexture.index]);
+					glUniform1i(glGetUniformLocation(programID, "useTexture"), 1);
 				}
 				glm::vec3 materialColor = {material.pbrMetallicRoughness.baseColorFactor[0],
 					material.pbrMetallicRoughness.baseColorFactor[1],
