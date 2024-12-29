@@ -20,15 +20,15 @@ vec4 fragPosLightSpace = lightMVP * vec4(worldPosition);
         // get depth of current fragment from light's perspective
         float currentDepth = projCoords.z;
         // check whether current frag is in shadow
-        float shadow = currentDepth - 0.0001 > closestDepth  ? 1.0 : 0.0;
+        float shadow = currentDepth - 0.001 > closestDepth  ? 1.0 : 0.75;
         if(projCoords.z > 1.0)
-                shadow = 0.0;
+                shadow = 0.75;
 
 
 
 
     FragColor.rbg = vec3(shadow);
-    FragColor.rgb = vec3(closestDepth); //欧若拉
-    //FragColor = texture(textureSampler, TexCoords) * (1 - shadow); // Sample the repeated texture
+    //FragColor.rgb = vec3(closestDepth); //欧若拉
+    FragColor = texture(textureSampler, TexCoords) * (1 - shadow); // Sample the repeated texture
 
 }

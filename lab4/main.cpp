@@ -17,7 +17,7 @@
 #include "skybox.h"
 #include "lab4_character.h"
 
-glm::vec3 eye_center(0.0f, 100.0f, 800.0f);
+glm::vec3 eye_center(0.0f, 500.0f, 800.0f);
 glm::vec3 lookat(0.0f, 0.0f, 0.0f);
 glm::vec3 up(0.0f, 1.0f, 0.0f);
 float viewDistance = 600.0f, viewPolar = -1.5f;
@@ -37,7 +37,6 @@ const glm::vec3 wave500(0.0f, 255.0f, 146.0f);
 const glm::vec3 wave600(255.0f, 190.0f, 0.0f);
 const glm::vec3 wave700(205.0f, 0.0f, 0.0f);
 static glm::vec3 lightIntensity = 40.0f * (8.0f * wave500 + 15.6f * wave600 + 18.4f * wave700);
-static glm::vec3 lightPosition(-275.0f, 500.0f, -275.0f);
 
 // Shadow mapping
 static glm::vec3 lightUp(0, 0, 1);
@@ -211,6 +210,10 @@ unsigned int makeShadowFrameBuffer() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return depthMap;
 
@@ -543,7 +546,7 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 
     if (key == GLFW_KEY_R && action == GLFW_PRESS)
     {
-        eye_center = glm::vec3(0.0f, 100.0f, 800.0f);
+        eye_center = glm::vec3(0.0f, 500.0f, 800.0f);
         viewPitch = 0.0f;
         viewAzimuth = 0.0f;
         recalculateView();
@@ -667,19 +670,21 @@ int main()
     glEnable(GL_DEPTH_TEST);
 
 	// Create Cornell Box
-	CornellBox box;
-	box.initialize();
+	//CornellBox box;
+	//box.initialize();
 
 	MyBot jinx;
 	jinx.initialize("../lab4/model/jinx/XP_Jinx_Rig.gltf");
+	jinx.position.z = 1000.0f;
 
 
 	MyBot motel;
 	motel.initialize("../lab4/model/buildings/motelfix8.gltf");
+	motel.position.z = 1000.0f;
 
 
 
-    initSkybox();
+
     initPlane();
 
     float FoV = 80.0f;
@@ -697,7 +702,6 @@ int main()
 	std::cout<<depthMapFBO<<"is the value of depthMapFBO"<<std::endl;
 	std::cout<<depthMap<<"is the value of depthMap"<<std::endl;
 	recalculateView();
-	glEnable(GL_CULL_FACE);
 
 	std::vector<std::string> modelPaths = {
 		"../lab4/model/buildings/building111.gltf",
@@ -714,11 +718,11 @@ int main()
 	// Random number generation setup
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> coordDist(250.0f, 350.0f);
+	std::uniform_real_distribution<float> coordDist(300.0f, 400.0f);
 	std::uniform_real_distribution<float> roadOffsetDist(300.0f, 400.0f); // Offset for buildings from the road
 	std::uniform_int_distribution<int> pathDist(0, modelPaths.size() - 1);
 
-	for (int i = 0; i < 150; ++i) {
+	for (int i = 0; i < 50; ++i) {
 		std::string modelName = modelPaths[i % modelPaths.size()];
 		float z = coordDist(gen); // Position along the road (z-axis)
 		float offset = roadOffsetDist(gen); // Distance from the road (x-axis)
@@ -737,10 +741,17 @@ int main()
 		models.push_back(rightBuilding);
 	}
 
+	initSkybox();
 
     // Main loop
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		  // Time and frame rate tracking
+  static double lastTime = glfwGetTime();
+  float time = 0.0f;            // Animation time
+  float fTime = 0.0f;            // Time for measuring fps
+  unsigned long frames = 0;
+
 		// Rotate mouse offset based on camera viewAzimuth
 		glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), -viewAzimuth + glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		mouseOffset.z = 100.0f;
@@ -761,7 +772,11 @@ int main()
 		glClear(GL_DEPTH_BUFFER_BIT);
 		// Render plane
 		renderPlane(lightViewMatrix, lightProjectionMatrix, lightViewMatrix, lightProjectionMatrix);
-		box.render(lightVpMatrix);
+		for (auto& model : models) {
+			model.render(lightVpMatrix);
+		}
+		jinx.render(lightVpMatrix);
+		//box.render(lightVpMatrix);
 		//saveDepthTexture("image1.png");
 	    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glActiveTexture(GL_TEXTURE1);
@@ -776,11 +791,11 @@ int main()
 		renderPlane(viewMatrix, projectionMatrix, lightViewMatrix, lightProjectionMatrix);
 
 		// Render Cornell Box
-		box.render(vpMatrix);
+		//box.render(vpMatrix);
 
 		//Render skybox
 
-		//renderSkybox(viewMatrix, projectionMatrix, eye_center);
+		renderSkybox(viewMatrix, projectionMatrix, eye_center);
 
 		jinx.render(vpMatrix);
 		motel.render(vpMatrix);
@@ -792,15 +807,28 @@ int main()
 		lastTime = currentTime;
 		_time += deltaTime * playbackSpeed;
 		jinx.update(_time/2);
-		jinx.position.z += 0.2;
+		jinx.position.z += 0.8;
 		motel.position.y = -2.5f;
+		// FPS tracking
+		// Count number of frames over a few seconds and take average
+		frames++;
+		fTime += deltaTime;
+
+			float fps = frames / fTime;
+			frames = 0;
+			fTime = 0;
+
+			std::stringstream stream;
+			stream << std::fixed << std::setprecision(2) << "Lab 4 | Frames per second (FPS): " << fps;
+			glfwSetWindowTitle(window, stream.str().c_str());
+
 
 
 		// Swap buffers
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-	box.cleanup();
+	//box.cleanup();
     glfwTerminate();
     return 0;
 }

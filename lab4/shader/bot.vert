@@ -9,6 +9,7 @@ layout(location = 4) in vec4 jointWeights;
 uniform mat4 jointMatrices[100];
 uniform mat4 MVP;
 uniform mat4 nodeMatrix;
+uniform mat4 modelMatrix;
 
 out vec3 fragNormal;
 out vec3 worldPosition;
@@ -41,7 +42,7 @@ void main() {
     // Transform normal
     fragNormal = mat3(skinMatrix) * vertexNormal;
 
-    worldPosition = vertexPosition;
+    worldPosition = (modelMatrix * nodeMatrix * skinnedPosition).xyz;
     worldNormal = vertexNormal;
     texCoords = vertexTexCoords;
 }

@@ -36,7 +36,7 @@ std::map<std::string, tinygltf::Model> modelCache;
 
 // Lighting
 static glm::vec3 _lightIntensity(5e6f, 5e6f, 5e6f);
-static glm::vec3 _lightPosition(-275.0f, 500.0f, 800.0f);
+static glm::vec3 lightPosition(-275.0f, 500.0f, 800.0f);
 
 // Animation
 static bool playAnimation = true;
@@ -634,6 +634,7 @@ struct MyBot {
 		GLuint buffer_handle;
 		GLuint second_buffer_handle;
 		glUniformMatrix4fv(mvpMatrixID, 1, GL_FALSE, &mvp[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(programID, "modelMatrix"), 1, GL_FALSE, &modelMatrix[0][0]);
 		if(skinObjects.size() != 0) {
 			if(skinObjects[0].jointMatrices.size() > 1000) {
 
@@ -670,7 +671,7 @@ struct MyBot {
 		// -----------------------------------------------------------------
 
 		// Set light data
-		glUniform3fv(lightPositionID, 1, &_lightPosition[0]);
+		glUniform3fv(lightPositionID, 1, &lightPosition[0]);
 		glUniform3fv(lightIntensityID, 1, &_lightIntensity[0]);
 
 		// Draw the GLTF model

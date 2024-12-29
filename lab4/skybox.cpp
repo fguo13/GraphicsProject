@@ -212,7 +212,7 @@ GLuint skyboxIndices[] = {
 };
 
 void initSkybox() {
-    skyboxTexture = LoadSkyBoxTexture("../lab4/shader/night2.png");
+    skyboxTexture = LoadSkyBoxTexture("../lab4/shader/maybe.png");
 
     glGenVertexArrays(1, &skyboxVAO);
     glGenBuffers(1, &skyboxVBO);
